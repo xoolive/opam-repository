@@ -1,0 +1,19 @@
+opam-version: "1.2"
+name: "win32-geodesy"
+version: "1.0"
+maintainer: "Xavier Olive <xavier@xoolive.org>"
+authors: "Xavier Olive <xavier@xoolive.org>"
+homepage: "https://github.com/xoolive/geodesy"
+license: "MIT"
+build: [
+  ["git" "clone" "https://github.com/ocaml-cmake/ocaml-cmake"]
+  ["cmake" "-DCMAKE_MODULE_PATH=./ocaml-cmake/cmake"
+  "-DCMAKE_TOOLCHAIN_FILE=i686-w64-mingw32.cmake"
+  "-DCMAKE_OCaml_EXECUTABLE=i686-w64-mingw32-ocaml" "."]
+  [make]
+]
+install: ["i686-w64-mingw32-ocamlfind" "install" "geodesy" "META"
+"geodesy-byte.cma" "geodesy.cmxa" "geodesy.a" "libmlgeodesy.a"
+"CMakeFiles/ocaml.geodesy.dir/geodesy.cmi"]
+remove: ["i686-w64-mingw32-ocamlfind" "remove" "geodesy"]
+depends: "win32-ocamlfind" {build}
